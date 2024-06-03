@@ -34,5 +34,3 @@ export const AbstractUserSchema: Schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-export const AbstractUser = mongoose.model("User", AbstractUserSchema);

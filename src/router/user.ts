@@ -1,13 +1,14 @@
 import express from "express"
-import { getAuthenticatedUser } from "../controllers/user"
+import { getAuthenticatedUser, createUser } from "../controllers/user"
 // import authenticate from "../middleware/authenticate";
 import { ExpressBasicAuthentication } from "../express-auth/authentication";
+import { UserModel } from "../db/user";
 
-
-const auth = new ExpressBasicAuthentication();
+const auth = new ExpressBasicAuthentication(UserModel);
 
 
 export default (router:express.Router) => {
-    router.post("/user", auth.authenticate,  getAuthenticatedUser);
+    router.post("/user",  createUser);
+    router.get("/user", auth.authenticate.bind(auth),  getAuthenticatedUser);
     
 }
